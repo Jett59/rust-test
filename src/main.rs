@@ -3,7 +3,7 @@ use std::time::Instant;
 use std::vec;
 
 fn main() {
-    let mut primes: Vec<u64> = vec![2u64];
+    let mut primes: Vec<u64> = vec![2];
     let start = Instant::now();
     find_primes(&mut primes, 200000000);
     let time_taken = start.elapsed();
@@ -13,11 +13,11 @@ fn main() {
         prime_txt.push_str(&prime.to_string());
         prime_txt.push('\n');
     }
-    fs::write("primes.txt", prime_txt).expect("Something went wrong!");
+    fs::write("primes.txt", prime_txt).expect("Writing to primes.txt");
 }
 
 fn find_primes(primes: &mut Vec<u64>, num: u64) {
-    for n in 3u64..num {
+    for n in 3..num {
         if is_prime(n, primes) {
             primes.push(n);
         }
@@ -25,7 +25,7 @@ fn find_primes(primes: &mut Vec<u64>, num: u64) {
 }
 
 fn is_prime(x: u64, primes: &Vec<u64>) -> bool {
-    let top = f64::sqrt(x as f64).floor() as u64;
+    let top = (x as f64).sqrt().floor() as u64;
     for n in primes {
         if (x % n) == 0 {
             return false;
